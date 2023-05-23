@@ -1,15 +1,23 @@
 import { Button, Text } from "@chakra-ui/react";
 
 interface TileProps {
+  tileIdx: number;
   tileNumber: number;
   isMatched: boolean;
-  isClickable: boolean;
+  moveTo: number;
+  switchTile: (idx: number, numChange: number) => void;
 }
 
-const Tile = ({ tileNumber, isMatched, isClickable }: TileProps) => {
+const Tile = ({
+  tileIdx,
+  tileNumber,
+  isMatched,
+  moveTo,
+  switchTile,
+}: TileProps) => {
   const tileClickedAction = () => {
-    if (isClickable && tileNumber !== 16) {
-      console.log("Diklik");
+    if (moveTo !== 0 && tileNumber !== 16) {
+      switchTile(tileIdx, moveTo);
     }
   };
 
@@ -17,9 +25,8 @@ const Tile = ({ tileNumber, isMatched, isClickable }: TileProps) => {
     <Button
       w="116px"
       h="116px"
-      bg={tileNumber === 16 ? "#33615B" : isMatched ? "#D1954F" : "#81E6D9"}
+      bg={tileNumber === 16 ? "#33615B" : isMatched ? "yellow.500" : "teal.200"}
       _hover={{ filter: "brightness(90%)", transform: "scale(0.98)" }}
-      colorScheme={isMatched ? "#D1954F" : "#4FD1C5"}
       onClick={tileClickedAction}
       borderRadius="13px"
     >
