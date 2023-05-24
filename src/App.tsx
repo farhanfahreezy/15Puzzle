@@ -5,29 +5,25 @@ import {
   Link,
   Modal,
   ModalBody,
-  ModalCloseButton,
   ModalContent,
   ModalFooter,
   ModalHeader,
   ModalOverlay,
   Stack,
+  Text,
   useDisclosure,
 } from "@chakra-ui/react";
 import MainWindow from "./component/MainWindow";
 
 function App() {
   const [tileArray, setTileArray] = useState<number[]>(
-    Array.from([1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
+    Array.from([1, 2, 3, 4, 5, 6, 7, 16, 9, 10, 11, 8, 13, 14, 15, 12])
   );
   const [numOfClicked, setNumOfClicked] = useState(0);
   const [timer, setTimer] = useState<number>(0);
   const [isTimerStarted, setIsTimerStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
-  const {
-    isOpen: isOpenModal,
-    onOpen: onOpenModal,
-    onClose: onCloseModal,
-  } = useDisclosure();
+  const { onOpen: onOpenModal, onClose: onCloseModal } = useDisclosure();
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -42,8 +38,15 @@ function App() {
   }, [isTimerStarted]);
 
   useEffect(() => {
-    randomizeTile();
-  }, []);
+    if (isFinished) {
+      setIsTimerStarted(false);
+      onOpenModal();
+    }
+  }, [isFinished]);
+
+  // useEffect(() => {
+  //   randomizeTile();
+  // }, []);
 
   useEffect(() => {
     checkFinished();
@@ -52,19 +55,40 @@ function App() {
   function randomizeTile() {
     const shuffledArray = tileArray.slice();
 
-    setTileArray([]);
+    do {
+      for (let i = shuffledArray.length - 1; i > 0; i--) {
+        const randomIndex = Math.floor(Math.random() * (i + 1));
+        [shuffledArray[i], shuffledArray[randomIndex]] = [
+          shuffledArray[randomIndex],
+          shuffledArray[i],
+        ];
+      }
+    } while (isSolveable(shuffledArray) == 1);
 
-    for (let i = shuffledArray.length - 1; i > 0; i--) {
-      const randomIndex = Math.floor(Math.random() * (i + 1));
-      [shuffledArray[i], shuffledArray[randomIndex]] = [
-        shuffledArray[randomIndex],
-        shuffledArray[i],
-      ];
-    }
     setTileArray(shuffledArray);
     setNumOfClicked(0);
     setIsTimerStarted(false);
     setTimer(0);
+  }
+
+  function isSolveable(array: number[]) {
+    let count = 1;
+    for (let i = 0; i < 16; i++) {
+      if (array[i] === 16) {
+        if (i % 2 === 0) {
+          count = 0;
+        }
+      }
+    }
+    for (let i = 0; i < 15; i++) {
+      for (let j = i + 1; j < 16; j++) {
+        if (array[j] < array[i]) {
+          count++;
+        }
+      }
+    }
+
+    return count % 2;
   }
 
   const switchTile = (idx: number, numChange: number) => {
@@ -80,19 +104,19 @@ function App() {
 
   const checkFinished = () => {
     let finished = true;
-    tileArray.map((index, number) => {
-      if (index !== number) {
+    for (let i = 0; i < 16; i++) {
+      if (tileArray[i] !== i + 1) {
         finished = false;
       }
-    });
+    }
     setIsFinished(finished);
     onOpenModal();
   };
 
   return (
     <>
-      <Stack direction={"row"} h="100vh">
-        <Container w="500px" h="100%">
+      <Stack direction={"row"} h="100vh" justifyContent="center">
+        <Container w="532px" h="100%">
           <MainWindow
             tileArray={tileArray}
             randomizeTile={randomizeTile}
@@ -104,23 +128,21 @@ function App() {
       </Stack>
       <Modal
         blockScrollOnMount={false}
-        isOpen={isOpenModal}
+        isOpen={isFinished}
         onClose={onCloseModal}
         isCentered
       >
         <ModalOverlay backdropFilter="blur(2px)" />
         <ModalContent>
-          <ModalHeader>Thank you for using this web-app!</ModalHeader>
-          <ModalCloseButton />
+          <ModalHeader>Congratulations!</ModalHeader>
           <ModalBody>
-            Hey there! So, this website is still in its development phase, but
-            fear not, updates are coming your way! ...Well, at least that's the
-            plan. Let's hope for the best, shall we?
+            <Text>Step : {numOfClicked}</Text>
+            <Text>Time : {timer}s</Text>
           </ModalBody>
 
           <ModalFooter>
             <Link
-              href="https://github.com/farhanfahreezy/Tubes3_13521058"
+              href="https://github.com/farhanfahreezy/15Puzzle"
               target="_blank"
             >
               <Button colorScheme="blue" mr={3}>

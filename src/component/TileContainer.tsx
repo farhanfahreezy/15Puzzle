@@ -38,7 +38,7 @@ const TileContainer = ({ tileArray, switchTile }: TCProps) => {
   ]);
 
   return (
-    <Grid templateColumns="repeat(4, 1fr)" gap="12px">
+    <Grid templateColumns="repeat(4, 1fr)" gap="12px" paddingBottom={3}>
       {row.map((idx) => (
         <GridItem key={idx}>
           <Tile

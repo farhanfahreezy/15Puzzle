@@ -25,7 +25,7 @@ const MainWindow = ({
 }: MWProps) => {
   return (
     <>
-      <VStack w="500px" h="100%">
+      <VStack w="100%" h="100%" paddingX={0}>
         <Text fontSize="50px" fontWeight="bold">
           15 Puzzle
         </Text>
@@ -51,6 +51,16 @@ const MainWindow = ({
           </HStack>
         </HStack>
         <TileContainer tileArray={tileArray} switchTile={switchTile} />
+        <Button
+          colorScheme="teal"
+          variant="outline"
+          border="2px"
+          w="100%"
+          paddingY={6}
+          borderRadius="10px"
+        >
+          Pause
+        </Button>
       </VStack>
     </>
   );
