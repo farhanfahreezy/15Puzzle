@@ -1,4 +1,4 @@
-import { Grid, GridItem } from "@chakra-ui/react";
+import { Grid, GridItem, useBreakpointValue } from "@chakra-ui/react";
 import Tile from "./Tile";
 
 interface TCProps {
@@ -36,9 +36,14 @@ const TileContainer = ({ tileArray, switchTile }: TCProps) => {
   const row = Array.from([
     0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15,
   ]);
+  const currentBreakpoint = useBreakpointValue({ base: "base", md: "md" });
 
   return (
-    <Grid templateColumns="repeat(4, 1fr)" gap="12px" paddingBottom={3}>
+    <Grid
+      templateColumns="repeat(4, 1fr)"
+      gap={currentBreakpoint === "md" ? "12px" : "9px"}
+      paddingBottom={3}
+    >
       {row.map((idx) => (
         <GridItem key={idx}>
           <Tile

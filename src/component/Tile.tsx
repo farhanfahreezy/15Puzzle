@@ -1,4 +1,4 @@
-import { Button, Text } from "@chakra-ui/react";
+import { Button, Text, useBreakpointValue } from "@chakra-ui/react";
 
 interface TileProps {
   tileIdx: number;
@@ -21,10 +21,11 @@ const Tile = ({
     }
   };
 
+  const currentBreakpoint = useBreakpointValue({ base: "base", md: "md" });
+
   return (
     <Button
-      w="116px"
-      h="116px"
+      boxSize={currentBreakpoint === "md" ? "116px" : "91px"}
       bg={tileNumber === 16 ? "#33615B" : isMatched ? "yellow.500" : "teal.200"}
       _hover={{ filter: "brightness(90%)", transform: "scale(0.98)" }}
       _active={{ transform: "scale(0.96)" }}

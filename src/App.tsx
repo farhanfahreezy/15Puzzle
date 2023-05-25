@@ -12,6 +12,7 @@ import {
   ModalOverlay,
   Stack,
   Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import MainWindow from "./component/MainWindow";
 
@@ -23,6 +24,7 @@ function App() {
   const [timer, setTimer] = useState(0);
   const [isTimerStarted, setIsTimerStarted] = useState(false);
   const [isFinished, setIsFinished] = useState(false);
+  const currentBreakpoint = useBreakpointValue({ base: "base", md: "md" });
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -149,7 +151,7 @@ function App() {
           zIndex: "2",
         }}
       >
-        <Container w="532px" h="100%">
+        <Container w={currentBreakpoint === "md" ? "532px" : "420px"} h="100%">
           <MainWindow
             tileArray={tileArray}
             randomizeTile={randomizeTile}
