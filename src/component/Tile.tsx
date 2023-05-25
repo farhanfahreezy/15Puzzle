@@ -31,7 +31,7 @@ const Tile = ({
       onClick={tileClickedAction}
       borderRadius="13px"
     >
-      <Text fontSize={48} color="#FFFFFF">
+      <Text fontSize={48} color="#FFFFFF" fontWeight="bold">
         {tileNumber !== 16 && tileNumber}
       </Text>
     </Button>

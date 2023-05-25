@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import {
   Button,
   Container,
+  HStack,
   Link,
   Modal,
   ModalBody,
@@ -41,9 +42,9 @@ function App() {
     }
   }, [isFinished]);
 
-  useEffect(() => {
-    randomizeTile();
-  }, []);
+  // useEffect(() => {
+  //   randomizeTile();
+  // }, []);
 
   useEffect(() => {
     checkFinished();
@@ -143,21 +144,41 @@ function App() {
         isCentered
       >
         <ModalOverlay backdropFilter="blur(2px)" />
-        <ModalContent>
-          <ModalHeader>Congratulations!</ModalHeader>
-          <ModalBody>
-            <Text>Step : {numOfClicked}</Text>
-            <Text>Time : {timer}s</Text>
+        <ModalContent bg="teal.100" textColor="teal.900" padding={-1}>
+          <ModalHeader pb={0}>
+            Congratulations!🎉
+            <Text fontSize={18} mt={5}>
+              Result:
+            </Text>
+          </ModalHeader>
+          <ModalBody bg="teal.500" paddingX={5} mx={6} borderRadius={10}>
+            <HStack>
+              <Text fontWeight="bold" textColor="white">
+                Step :
+              </Text>
+              <Text fontWeight="bold" textColor="teal.100">
+                {numOfClicked}
+              </Text>
+            </HStack>
+            <HStack>
+              <Text fontWeight="bold" textColor="white">
+                Time :
+              </Text>
+              <Text fontWeight="bold" textColor="teal.100">
+                {timer}s
+              </Text>
+            </HStack>
           </ModalBody>
 
-          <ModalFooter>
+          <ModalFooter justifyContent="space-between">
+            <Button colorScheme="teal" onClick={reset}>
+              Play Again
+            </Button>
             <Link
               href="https://github.com/farhanfahreezy/15Puzzle"
               target="_blank"
             >
-              <Button colorScheme="blue" mr={3}>
-                Visit Our Github
-              </Button>
+              <Button colorScheme="green">Visit Our Github</Button>
             </Link>
           </ModalFooter>
         </ModalContent>
