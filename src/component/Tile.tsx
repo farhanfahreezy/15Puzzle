@@ -27,6 +27,7 @@ const Tile = ({
       h="116px"
       bg={tileNumber === 16 ? "#33615B" : isMatched ? "yellow.500" : "teal.200"}
       _hover={{ filter: "brightness(90%)", transform: "scale(0.98)" }}
+      _active={{ transform: "scale(0.96)" }}
       onClick={tileClickedAction}
       borderRadius="13px"
     >
