@@ -14,7 +14,7 @@ To run this program,
 2. Run `npm run dev` in root terminal
 3. Open `localhost:XXXX`
 
-Or just open https://farhanfahreezy.github.io/15Puzzle/ and play right away 😁
+Or just open https://play15puzzle.vercel.app/ and play right away 😁
 
 ## Author
 
