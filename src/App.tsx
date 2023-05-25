@@ -42,9 +42,9 @@ function App() {
     }
   }, [isFinished]);
 
-  // useEffect(() => {
-  //   randomizeTile();
-  // }, []);
+  useEffect(() => {
+    randomizeTile();
+  }, []);
 
   useEffect(() => {
     checkFinished();
@@ -124,7 +124,31 @@ function App() {
 
   return (
     <>
-      <Stack direction={"row"} h="100vh" justifyContent="center">
+      <Stack
+        direction={"row"}
+        h="100vh"
+        justifyContent="center"
+        overflowY="scroll"
+        overflowX="hidden"
+        sx={{
+          "&::-webkit-scrollbar": {
+            width: "6px",
+            // transition: "opacity 0.2s ease-in-out",
+          },
+          "&::-webkit-scrollbar:hover": {
+            width: "6px",
+          },
+          "&::-webkit-scrollbar-track": {
+            background: "transparent",
+          },
+          "&::-webkit-scrollbar-thumb": {
+            background: "gray.500",
+            borderRadius: "md",
+          },
+          position: "relative",
+          zIndex: "2",
+        }}
+      >
         <Container w="532px" h="100%">
           <MainWindow
             tileArray={tileArray}
