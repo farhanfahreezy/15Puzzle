@@ -12,7 +12,7 @@ const Footer = () => {
         <Text
           fontWeight="bold"
           fontSize={currentBreakpoint === "md" ? 45 : 35}
-          mr={currentBreakpoint === "md" ? "246px" : "165px"}
+          mr={currentBreakpoint === "md" ? "246px" : "100px"}
         >
           1 to 15
         </Text>

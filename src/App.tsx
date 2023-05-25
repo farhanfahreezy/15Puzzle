@@ -151,7 +151,7 @@ function App() {
           zIndex: "2",
         }}
       >
-        <Container w={currentBreakpoint === "md" ? "532px" : "420px"} h="100%">
+        <Container w={currentBreakpoint === "md" ? "532px" : "360px"} h="100%">
           <MainWindow
             tileArray={tileArray}
             randomizeTile={randomizeTile}

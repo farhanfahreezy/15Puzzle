@@ -41,7 +41,7 @@ const TileContainer = ({ tileArray, switchTile }: TCProps) => {
   return (
     <Grid
       templateColumns="repeat(4, 1fr)"
-      gap={currentBreakpoint === "md" ? "12px" : "9px"}
+      gap={currentBreakpoint === "md" ? "12px" : "8px"}
       paddingBottom={3}
     >
       {row.map((idx) => (
