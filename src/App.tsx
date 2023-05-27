@@ -75,7 +75,16 @@ function App() {
     let count = 1;
     for (let i = 0; i < 16; i++) {
       if (array[i] === 16) {
-        if (i % 2 === 0) {
+        if (
+          i === 0 ||
+          i == 2 ||
+          i == 5 ||
+          i == 7 ||
+          i == 8 ||
+          i == 10 ||
+          i == 13 ||
+          i == 15
+        ) {
           count = 0;
         }
       }
